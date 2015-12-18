@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 ETCD_NODES=""
+TINC_CONFD_ETCD_NODES=($TINC_CONFD_ETCD_NODES)
 # add nodes
 for node in "${TINC_CONFD_ETCD_NODES[@]}"
 do

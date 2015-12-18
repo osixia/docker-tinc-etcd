@@ -8,18 +8,14 @@ if [ $TINC_CONFD_PUBLIC_IP != $ip ]; then
 
   if [ "$ETCD_WATCH_ACTION" = "set" ]; then
     current_value="";
-    if [ -f /srv/tinc/hosts/$host ]; then
-      current_value="$( cat /srv/tinc/hosts/$host )"
+    if [ -f /etc/tinc/hosts/$host ]; then
+      current_value="$( cat /etc/tinc/hosts/$host )"
     fi
     if [ "$ETCD_WATCH_VALUE" != "\"$current_value\"" ]; then
-      tinc add ConnectTo = $host
-      etcdctl-cmd get /_osixia.net/tinc/$ip | sed -e 's/\"//g' > /srv/tinc/hosts/$host
-      sv reload tinc
+      etcdctl-cmd get /_osixia.net/tinc/$ip | sed -e 's/\"//g' > /etc/tinc/hosts/$host
     fi
   fi
   if [ "$ETCD_WATCH_ACTION" = "delete" ] || [ "$ETCD_WATCH_ACTION" = "expire" ]; then
-    tinc del ConnectTo = $host
-    rm -f /srv/tinc/hosts/$host
-    sv reload tinc
+    rm -f /etc/tinc/hosts/$host
   fi
 fi
