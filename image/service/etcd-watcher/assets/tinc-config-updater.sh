@@ -1,7 +1,9 @@
 #!/bin/sh
 
 key=${ETCD_WATCH_KEY}
-host=$(echo $key | sed -e 's|$TINC_ETCD_KEY_DIR||g')
+host=$(echo $key | sed -e "s|${TINC_ETCD_KEY_DIR}||g")
+
+TINC_HOSTNAME=$(echo $TINC_HOSTNAME | sed -e 's/[^a-zA-Z0-9\-]/_/g')
 
 if [ $TINC_HOSTNAME != $host ]; then
 
