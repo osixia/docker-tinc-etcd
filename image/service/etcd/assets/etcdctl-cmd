@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
 ETCD_NODES=""
-TINC_CONFD_ETCD_NODES=($TINC_CONFD_ETCD_NODES)
+TINC_ETCD_NODES_TABLE=($TINC_ETCD_NODES)
 # add nodes
-for node in "${TINC_CONFD_ETCD_NODES[@]}"
+for node in "${TINC_ETCD_NODES_TABLE[@]}"
 do
   #host var contain a variable name, we access to the variable value and cast it to a table
   node_txt=${!node}
@@ -22,18 +22,18 @@ ETCD_NODES=${ETCD_NODES::-1}
 
 # etcd certs
 TINC_CONFD_CLIENT_CAKEYS=""
-if [ -n "${TINC_CONFD_CLIENT_CAKEYS_FILENAME}" ]; then
-  TINC_CONFD_CLIENT_CAKEYS="--ca-file /container/service/etcd/assets/certs/$TINC_CONFD_CLIENT_CAKEYS_FILENAME"
+if [ -n "${TINC_ETCD_CLIENT_CA_FILENAME}" ]; then
+  TINC_CONFD_CLIENT_CAKEYS="--ca-file /container/service/etcd/assets/certs/$TINC_ETCD_CLIENT_CA_FILENAME"
 fi
 
 TINC_CONFD_CLIENT_CERT=""
-if [ -n "${TINC_CONFD_CLIENT_CERT_FILENAME}" ]; then
-  TINC_CONFD_CLIENT_CERT="--cert-file /container/service/etcd/assets/certs/$TINC_CONFD_CLIENT_CERT_FILENAME"
+if [ -n "${TINC_ETCD_CLIENT_CERT_FILENAME}" ]; then
+  TINC_CONFD_CLIENT_CERT="--cert-file /container/service/etcd/assets/certs/$TINC_ETCD_CLIENT_CERT_FILENAME"
 fi
 
 TINC_CONFD_CLIENT_KEY=""
-if [ -n "${TINC_CONFD_CLIENT_KEY_FILENAME}" ]; then
-  TINC_CONFD_CLIENT_KEY="--key-file /container/service/etcd/assets/certs/$TINC_CONFD_CLIENT_KEY_FILENAME"
+if [ -n "${TINC_ETCD_CLIENT_KEY_FILENAME}" ]; then
+  TINC_CONFD_CLIENT_KEY="--key-file /container/service/etcd/assets/certs/$TINC_ETCD_CLIENT_KEY_FILENAME"
 fi
 
-exec etcdctl --endpoint $ETCD_NODES $TINC_CONFD_CLIENT_CAKEYS $TINC_CONFD_CLIENT_CERT $TINC_CONFD_CLIENT_KEY $@
+exec etcdctl --endpoint $ETCD_NODES $TINC_CONFD_CLIENT_CAKEYS $TINC_CONFD_CLIENT_CERT $TINC_CONFD_CLIENT_KEY "$@"
