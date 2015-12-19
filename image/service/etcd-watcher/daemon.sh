@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+# wait tinc service
+sv start tinc || exit 1
+
 TINC_HOSTNAME=$(echo $HOSTNAME | sed -e 's/[^a-zA-Z0-9\-]/_/g')
 
 # get initial config
@@ -10,6 +13,6 @@ for host in `etcdctl-cmd ls $TINC_ETCD_KEY_DIR | sed -e "s|${TINC_ETCD_KEY_DIR}|
   fi
 done
 
-sv reload tinc
+tinc reload
 
 exec etcdctl-cmd exec-watch --recursive $TINC_ETCD_KEY_DIR -- /container/service/etcd-watcher/assets/tinc-config-updater.sh
