@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-TINC_HOSTNAME=$(echo $TINC_HOSTNAME | sed -e 's/[^a-zA-Z0-9\-]/_/g')
+TINC_HOSTNAME=$(echo $HOSTNAME | sed -e 's/[^a-zA-Z0-9\-]/_/g')
 
 while true; do
 
