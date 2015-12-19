@@ -8,8 +8,8 @@ TINC_HOSTNAME=$(echo $HOSTNAME | sed -e 's/[^a-zA-Z0-9\-]/_/g')
 # get initial config
 for host in `etcdctl-cmd ls $TINC_ETCD_KEY_DIR | sed -e "s|${TINC_ETCD_KEY_DIR}||g"`; do
   if [ "$TINC_HOSTNAME" != "$host" ]; then
-    tinc add ConnectTo = $host
     etcdctl-cmd get $TINC_ETCD_KEY_DIR$host | sed -e 's/\"//g' > /etc/tinc/hosts/$host
+    tinc add ConnectTo = $host
   fi
 done
 

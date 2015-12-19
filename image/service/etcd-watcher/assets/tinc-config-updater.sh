@@ -13,8 +13,8 @@ if [ $TINC_HOSTNAME != $host ]; then
       current_value="$( cat /etc/tinc/hosts/$host )"
     fi
     if [ "$ETCD_WATCH_VALUE" != "\"$current_value\"" ]; then
-      tinc add ConnectTo = $host
       etcdctl-cmd get $TINC_ETCD_KEY_DIR$host | sed -e 's/\"//g' > /etc/tinc/hosts/$host
+      tinc add ConnectTo = $host
       tinc reload
     fi
   fi
