@@ -15,12 +15,12 @@ if [ $TINC_HOSTNAME != $host ]; then
     if [ "$ETCD_WATCH_VALUE" != "\"$current_value\"" ]; then
       etcdctl-cmd get $TINC_ETCD_KEY_DIR$host | sed -e 's/\"//g' > /etc/tinc/hosts/$host
       tinc add ConnectTo = $host
-      tinc reload
+      sv start tinc && tinc reload
     fi
   fi
   if [ "$ETCD_WATCH_ACTION" = "delete" ] || [ "$ETCD_WATCH_ACTION" = "expire" ]; then
     tinc del ConnectTo = $host
-    tinc reload
+    sv start tinc && tinc reload
     rm -f /etc/tinc/hosts/$host
   fi
 fi
