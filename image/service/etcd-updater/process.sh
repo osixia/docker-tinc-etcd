@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # wait tinc service
-sv start tinc || exit 1
+sv start /container/run/process/tinc || exit 1
 
 # set -x (bash debug) if log level is trace
 # https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/log-helper
