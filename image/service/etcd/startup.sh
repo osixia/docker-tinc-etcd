@@ -4,5 +4,5 @@
 # https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/log-helper
 log-helper level eq trace && set -x
 
-ln -s ${CONTAINER_SERVICE_DIR}/etcd/assets/etcdctl /usr/sbin/etcdctl
-ln -s ${CONTAINER_SERVICE_DIR}/etcd/assets/etcdctl-cmd /usr/sbin/etcdctl-cmd
+ln -sf ${CONTAINER_SERVICE_DIR}/etcd/assets/etcdctl /usr/sbin/etcdctl
+ln -sf ${CONTAINER_SERVICE_DIR}/etcd/assets/etcdctl-cmd /usr/sbin/etcdctl-cmd
