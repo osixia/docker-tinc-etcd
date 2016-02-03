@@ -10,7 +10,7 @@ if [ $TINC_HOSTNAME != $host ]; then
   if [ "$ETCD_WATCH_ACTION" = "set" ]; then
     current_value="";
     if [ -f /etc/tinc/hosts/$host ]; then
-      current_value="$( cat /etc/tinc/hosts/$host )"
+      current_value="$( cat ${CONTAINER_SERVICE_DIR}/tinc/data/hosts/$host )"
     fi
     if [ "$ETCD_WATCH_VALUE" != "\"$current_value\"" ]; then
       etcdctl-cmd get $TINC_ETCD_KEY_DIR$host | sed -e 's/\"//g' > /etc/tinc/hosts/$host
