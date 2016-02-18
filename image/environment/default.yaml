@@ -1,4 +1,4 @@
-TINC_ETCD_NODES: https://62.210.254.122:2379
+TINC_ETCD_NODES: https://etcd-host:2379
 TINC_ETCD_KEY_DIR: /_osixia.net/tinc/
 
 TINC_ETCD_KEY_TTL: 60 # in seconds
