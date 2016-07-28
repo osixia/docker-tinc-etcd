@@ -1,5 +1,5 @@
 NAME = osixia/tinc-etcd
-VERSION = 0.1.1
+VERSION = 0.1.2
 
 .PHONY: all build build-nocache test tag_latest release
 

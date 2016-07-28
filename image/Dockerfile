@@ -1,4 +1,4 @@
-FROM osixia/tinc:0.1.1
+FROM osixia/tinc:0.1.3
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 # Install multiple process stack from baseimage
