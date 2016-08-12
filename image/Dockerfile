@@ -16,6 +16,7 @@ RUN apt-get -y update \
     && mv etcd-v${ETCD_VERSION}-linux-amd64/etcdctl /usr/sbin/etcdctl \
     && chmod +x /usr/sbin/etcdctl \
     && rm -rf  etcd-v${ETCD_VERSION}-linux-amd64 etcd.tar.gz \
+    && apt-get remove -y --purge --auto-remove curl ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
