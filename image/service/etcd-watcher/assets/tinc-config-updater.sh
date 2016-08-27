@@ -14,12 +14,12 @@ if [ $TINC_HOSTNAME != $host ]; then
     fi
     if [ "$ETCD_WATCH_VALUE" != "\"$current_value\"" ]; then
       etcdctl-cmd get $TINC_ETCD_KEY_DIR$host | sed -e 's/\"//g' > ${CONTAINER_SERVICE_DIR}/tinc/data/hosts/$host
-      tinc -c ${CONTAINER_SERVICE_DIR}/tinc/data add ConnectTo = $host
+      tinc --config ${CONTAINER_SERVICE_DIR}/tinc/data add ConnectTo = $host
       sv start /container/run/process/tinc && tinc reload
     fi
   fi
   if [ "$ETCD_WATCH_ACTION" = "delete" ] || [ "$ETCD_WATCH_ACTION" = "expire" ]; then
-    tinc -c ${CONTAINER_SERVICE_DIR}/tinc/data del ConnectTo = $host
+    tinc --config ${CONTAINER_SERVICE_DIR}/tinc/data del ConnectTo = $host
     sv start /container/run/process/tinc && tinc reload
     rm -f ${CONTAINER_SERVICE_DIR}/tinc/data/hosts/$host
   fi
