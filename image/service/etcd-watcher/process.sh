@@ -8,13 +8,13 @@ sv start /container/run/process/tinc || exit 1
 log-helper level eq trace && set -x
 
 
-TINC_HOSTNAME=$(echo $HOSTNAME | sed -e 's/[^a-zA-Z0-9\-]/_/g')
+TINC_HOSTNAME=$(echo $HOSTNAME | sed -e 's/[^a-zA-Z0-9\_]/_/g')
 
 # get initial config
 for host in `etcdctl-cmd ls $TINC_ETCD_KEY_DIR | sed -e "s|${TINC_ETCD_KEY_DIR}||g"`; do
   if [ "$TINC_HOSTNAME" != "$host" ]; then
     etcdctl-cmd get $TINC_ETCD_KEY_DIR$host | sed -e 's/\"//g' > ${CONTAINER_SERVICE_DIR}/tinc/data/hosts/$host
-    tinc -c ${CONTAINER_SERVICE_DIR}/tinc/data add ConnectTo = $host
+    tinc --config ${CONTAINER_SERVICE_DIR}/tinc/data add ConnectTo = $host
   fi
 done
 

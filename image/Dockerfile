@@ -1,10 +1,22 @@
-FROM osixia/tinc:0.1.1
+FROM osixia/tinc:0.1.3
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
+
+ENV ETCD_VERSION=3.0.4
 
 # Install multiple process stack from baseimage
 # https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/install-multiple-process-stack
 RUN apt-get -y update \
     && /container/tool/add-multiple-process-stack \
+    && LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+       ca-certificates \
+       curl \
+    && /container/tool/add-service-available :ssl-tools \
+    && curl -o etcd.tar.gz -SL https://github.com/coreos/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-amd64.tar.gz \
+    && tar -zxvf etcd.tar.gz etcd-v${ETCD_VERSION}-linux-amd64/etcdctl \
+    && mv etcd-v${ETCD_VERSION}-linux-amd64/etcdctl /usr/sbin/etcdctl \
+    && chmod +x /usr/sbin/etcdctl \
+    && rm -rf  etcd-v${ETCD_VERSION}-linux-amd64 etcd.tar.gz \
+    && apt-get remove -y --purge --auto-remove curl ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
