@@ -6,7 +6,7 @@
 
 [hub]: https://hub.docker.com/r/osixia/tinc-etcd/
 
-**A docker image to run tinc that get host to connect to from etcd thanks to confd**
+**A docker image to run Tinc VPN that get host to connect to from ETCD**
 
 ## Under the hood: osixia/tinc
 
