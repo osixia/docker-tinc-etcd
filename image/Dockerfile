@@ -1,4 +1,4 @@
-FROM osixia/tinc:0.1.3
+FROM osixia/tinc:0.1.4
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
 ENV ETCD_VERSION=3.0.4

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.3
+  - Upgrade baseimage: tinc:0.1.4
+
 ## 0.1.2
   - Upgrade baseimage: tinc:0.1.3
   - Remove etcdctl from repo, download from official release
