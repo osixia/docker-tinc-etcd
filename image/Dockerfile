@@ -1,7 +1,7 @@
-FROM osixia/tinc:0.1.4
+FROM osixia/tinc:0.2.0
 MAINTAINER Bertrand Gouny <bertrand.gouny@osixia.net>
 
-ENV ETCD_VERSION=3.0.4
+ARG ETCD_VERSION=3.2.1
 
 # Install multiple process stack from baseimage
 # https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/install-multiple-process-stack
