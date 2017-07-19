@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+  - etcdctl v3.2.1
+  - Upgrade baseimage: tinc:0.2.0 (debian stretch)
+
 ## 0.1.3
   - Upgrade baseimage: tinc:0.1.4
 
