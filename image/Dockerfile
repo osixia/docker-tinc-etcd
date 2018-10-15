@@ -1,14 +1,14 @@
-FROM osixia/tinc:0.2.2
+FROM osixia/tinc:0.2.3
 
-ARG ETCD_VERSION=3.3.9
+ARG ETCD_VERSION=3.3.10
 
 # Install multiple process stack from baseimage
 # https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/install-multiple-process-stack
 RUN apt-get -y update \
     && /container/tool/add-multiple-process-stack \
     && LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-       ca-certificates \
-       curl \
+    ca-certificates \
+    curl \
     && /container/tool/add-service-available :ssl-tools \
     && curl -o etcd.tar.gz -SL https://github.com/coreos/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-amd64.tar.gz \
     && tar -zxvf etcd.tar.gz etcd-v${ETCD_VERSION}-linux-amd64/etcdctl \
